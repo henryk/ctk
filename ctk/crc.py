@@ -33,3 +33,16 @@ class CRC(object):
     
     def finish(self):
         return self._state ^ self._post
+
+    def map(self, expression):
+        data_width = expression.get_data_width()
+        
+        for data in expression.expand():
+            self.clear()
+            for word in data:
+                self.update(word, data_width)
+            yield self.finish()
+    
+    def calculate(self, data):
+        for result in self.map(data):
+            return result # Only return the first result from the iterator
