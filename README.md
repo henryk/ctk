@@ -48,7 +48,8 @@ expressions (`Data()` itself is an expression):
 
 
 ### Concat(a, b, …)
- simply concatenates the source expressions
+ simply concatenates the variations of the source expressions.
+ If applicable, the Cartesian product is generated.
 
 ### Optional(a)
  will either include `a` or not (yielding two variations)
@@ -56,18 +57,19 @@ expressions (`Data()` itself is an expression):
 ### Repeat(a, min, max=1)
  repeats `a` for a fixed or variable number of repetitions.
  `Repeat(a, 2)` is equivalent to `Concat(a, a)`.
- Note that if a yields multiple variations the Cartesian product is
-      generated (same as with `Concat()`).
+ Note that if `a` yields multiple variations the Cartesian product is
+ generated (same as with `Concat()`).
 
 ### Permute(a, b, …, min=?, max=?)
  generates all permutations of the given elements. If `min` and/or
- `max` are specified it can additionally generate permutation that
+ `max` are specified it can additionally generate permutations that
  include only the given number of elements.
 
 ### Combine(a, b, …, min=?, max=?)
  generates combinations, similar to `Permute()` but only with
  elements in the given order. `Combine(a, b, c)` is equivalent to
- `Concat(a, b, c)`.
+ `Concat(a, b, c)`. Note that `Combine(a, b, min=1, max=1)` is
+ equivalent to the alternation operator in regular expressions.
 
 
 Example:
